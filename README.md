@@ -3,6 +3,8 @@
 
 </div>
 
+[work in progress]
+
 The Graphical User Interface (GUI) serves a crucial role in our CanSat operations. Prior to the launch, our team will be stationed at a safe distance in a bunker, necessitating a remote method to verify the CanSat’s functionality. The GUI fulfills this requirement by presenting data from the radios, thereby ensuring all systems are operating as expected.
 
 The GUI allows us to confirm that the telemetry radios are receiving strong signals, the sensors are producing accurate data, the GPS has secured a reliable satellite lock, the battery is fully charged, and the memory has been cleared. In essence, it provides us with the necessary assurances that we are “go for launch”.
