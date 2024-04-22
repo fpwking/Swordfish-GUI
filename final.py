@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
         self.labelDataRate = QLabel("Telemetry Data Rate: ")
         self.labelSuccessRate = QLabel("Telemetry Packet Success Rate: ")
         self.button = QPushButton("Switch State")
-
+        
         # Create a layout for the labels
         layoutLabels = QVBoxLayout()
         layoutLabels.addWidget(self.labelGPS)
