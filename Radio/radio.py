@@ -7,7 +7,7 @@ class Radio():
         self.__PORT = port
         self.__BAUDRATE = baudrate
         self.__TIMEOUT = timeOut
-        self.__RADIO = serial.Serial(self.__PORT, self.__BAUDRATE, timeout = self.__TIMEOUT)      
+        #self.__RADIO = serial.Serial(self.__PORT, self.__BAUDRATE, timeout = self.__TIMEOUT)      
 
     def sendSelf(self, x):
         self.__RADIO.write(bytes(x+"\r\n", 'utf-8'))
@@ -33,7 +33,7 @@ class Radio():
     # <Coding Rate> Determines the redundant bits. Lower CR = faster transmission time
     # <Programmed Preamble> Larger PP = less loss of data and longer transmission time
     # 
-    # Recommanded:
+    # Recommended:
     # Within 3 km: (10, 7, 1, 7)
     # More than 3 km: (12, 4, 1, 7)
     def setParam(self, sf, bw, cr, pp):
@@ -58,13 +58,13 @@ class Radio():
          self.__NTW = ntw
          self.sendSelf("AT+NETWORKID=%d" %self.__NTW)
 
-    #<Password> Must have same password for data to be recognized. 32 character AES password.
+    # <Password> Must have same password for data to be recognized. 32 character AES password.
     def setPASS(self, PASS):
          self.__PASS = PASS
          if self.__PASS is None: return 
          else: self.sendSelf("AT+CPIN=%s" %self.__PASS)
 
-    #<Output Power>
+    # <Output Power>
     def setOP(self, op):
          self.__OP = op
          self.sendSelf("AT+CRFOP=%d" %self.__OP)
@@ -95,7 +95,19 @@ class Radio():
          time.sleep(0.1)
          self.read()
 
+     #decoding the message
+    def parseMsg (self, data):
+         if(data[:5] == "+RCV="):
+              x = data.split(",")
+              self.__SENDER = x[0][5:]
+              self.__DATASIZE = int(x[1])
+              self.__DATA = x[2]
+              self.__RSSI = int(x[3])
+              self.__SNR = int(x[4])
 
-
-
-    
+              print(data)
+              print(self.__SENDER)
+              print(self.__DATASIZE)
+              print(self.__DATA)
+              print(self.__RSSI)
+              print(self.__SNR)
